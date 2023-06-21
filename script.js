@@ -1,5 +1,7 @@
 const addBtn = document.getElementById('add');
 
+
+
 addBtn.addEventListener('click', ()=> addNewNote('Add new note'));
 
 function addNewNote(text = '') {
@@ -39,5 +41,27 @@ function addNewNote(text = '') {
     textArea.classList.toggle('hidden')
 });
 
+textArea.addEventListener('input', (e)=> {
+    // console.log(e)
+    const value = e.target.value;
+    // console.log(value);
+    main.innerHTML = value;
+    updateLS()
+})
+
     document.body.appendChild(note);
 }
+
+
+function updateLS() {
+    const notesText = document.querySelectorAll('textarea');
+
+    const notes = [];
+
+    notesText.forEach(note => notes.push(note.value))
+
+// console.log(notes, notesText)
+
+    localStorage.setItem('note', JSON.stringify(notes))
+}
+
